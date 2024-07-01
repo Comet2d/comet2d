@@ -8,7 +8,7 @@ At this point there is little point in creating documentation - the API will cha
 Currently the easiest way to add to a project is as a git submodule.
 
 ```sh
-git submodule add "https://github.com/DispairingGoose/comet2d.git" "comet2d/"
+git submodule add "https://github.com/Comet2d/comet2d.git" "comet2d/"
 git submodule update --init --recursive
 ```
 
