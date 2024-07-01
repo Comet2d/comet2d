@@ -29,8 +29,8 @@ pub fn position(self: *const cmt.mouse.Mouse) cmt.math.Vec2(i32) {
     const mouse_state = sdl.getMouseState();
 
     return .{
-        .x = @intCast(@divFloor(@as(i32, @intCast(mouse_state.x)), self.comet.graphics.windowRatio)),
-        .y = @intCast(@divFloor(@as(i32, @intCast(mouse_state.y)), self.comet.graphics.windowRatio)),
+        .x = @intCast(@divFloor(@as(i32, @intCast(mouse_state.x)), self.comet.graphics.window_ratio)),
+        .y = @intCast(@divFloor(@as(i32, @intCast(mouse_state.y)), self.comet.graphics.window_ratio)),
     };
 }
 
