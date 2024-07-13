@@ -17,21 +17,21 @@ pub const AnchorPosition = union(enum) {
     pub fn resolve(self: cmt.graphics.AnchorPosition, frame_size: cmt.math.Vec2(u32)) cmt.math.Vec2(i32) {
         switch (self) {
             .absolute => |absolute| {
-                return absolute.scale(-1);
+                return absolute * @as(cmt.math.Vec2(i32), @splat(-1));
             },
             .relative => |e| {
-                var vec = @as(cmt.math.Vec2(i32), .{ .x = 0, .y = 0 });
+                var vec = @as(cmt.math.Vec2(i32), .{ 0, 0 });
 
-                switch (e.x) {
-                    .start => vec.x = 0,
-                    .middle => vec.x = @divExact(-@as(i32, @intCast(frame_size.x)), 2),
-                    .end => vec.x = -@as(i32, @intCast(frame_size.x)),
+                switch (e[0]) {
+                    .start => vec[0] = 0,
+                    .middle => vec[0] = @divExact(-@as(i32, @intCast(frame_size[0])), 2),
+                    .end => vec[0] = -@as(i32, @intCast(frame_size[0])),
                 }
 
-                switch (e.y) {
-                    .start => vec.y = 0,
-                    .middle => vec.y = @divExact(-@as(i32, @intCast(frame_size.y)), 2),
-                    .end => vec.y = -@as(i32, @intCast(frame_size.y)),
+                switch (e[1]) {
+                    .start => vec[1] = 0,
+                    .middle => vec[1] = @divExact(-@as(i32, @intCast(frame_size[1])), 2),
+                    .end => vec[1] = -@as(i32, @intCast(frame_size[1])),
                 }
 
                 return vec;

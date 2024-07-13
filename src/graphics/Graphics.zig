@@ -16,7 +16,7 @@ pub fn loadTexture(self: *const cmt.graphics.Graphics, path: [:0]const u8, optio
     h_frames: u32 = 1,
     v_frames: u32 = 1,
     animations: ?std.ArrayList(cmt.graphics.Animation) = null,
-    anchor_position: cmt.graphics.AnchorPosition = .{ .relative = .{ .x = .start, .y = .start } },
+    anchor_position: cmt.graphics.AnchorPosition = .{ .relative = .{ .start, .start } },
 }) cmt.graphics.Texture {
     const raw_texture = sdl.image.loadTexture(self.renderer, path) catch unreachable;
 
@@ -37,7 +37,7 @@ pub fn loadTexture(self: *const cmt.graphics.Graphics, path: [:0]const u8, optio
     };
 }
 
-pub fn print(self: *const cmt.graphics.Graphics, text: [:0]const u8, color: *const cmt.graphics.Color, options: struct { anchor_position: cmt.graphics.AnchorPosition = .{ .absolute = .{ .x = 0, .y = 0 } } }) !cmt.graphics.Texture {
+pub fn print(self: *const cmt.graphics.Graphics, text: [:0]const u8, color: *const cmt.graphics.Color, options: struct { anchor_position: cmt.graphics.AnchorPosition = .{ .absolute = .{ 0, 0 } } }) !cmt.graphics.Texture {
     const font = self.current_font orelse return error.FontNotSet;
     const surface = font.renderTextSolid(text, color.*) catch unreachable;
     defer surface.destroy();
@@ -67,7 +67,7 @@ pub fn print(self: *const cmt.graphics.Graphics, text: [:0]const u8, color: *con
 pub fn measureText(self: *const cmt.graphics.Graphics, text: [:0]const u8, comptime IntT: type) !cmt.math.Vec2(IntT) {
     const font = self.current_font orelse return error.FontNotSet;
     const size = font.sizeText(text) catch unreachable;
-    return .{ .x = @intCast(size.width), .y = @intCast(size.height) };
+    return .{ @intCast(size.width), @intCast(size.height) };
 }
 
 pub fn loadFont(_: *const cmt.graphics.Graphics, path: [:0]const u8, size: u32) cmt.graphics.Font {
@@ -89,8 +89,8 @@ pub fn drawRaw(self: *const cmt.graphics.Graphics, texture: *const cmt.graphics.
     const src_rect = texture.animation_data.frame(frame);
 
     const target_rect = @as(cmt.graphics.Rect, .{
-        .x = position.x + texture.animation_data.anchor_position.x,
-        .y = position.y + texture.animation_data.anchor_position.y,
+        .x = position[0] + texture.animation_data.anchor_position[0],
+        .y = position[1] + texture.animation_data.anchor_position[1],
         .width = src_rect.width,
         .height = src_rect.height,
     });
@@ -113,8 +113,8 @@ pub fn draw(self: *const cmt.graphics.Graphics, animator: *const cmt.graphics.Te
     const src_rect = animator.texture.animation_data.frame(animator.frame);
 
     const target_rect = @as(cmt.graphics.Rect, .{
-        .x = position.x + animator.texture.animation_data.anchor_position.x,
-        .y = position.y + animator.texture.animation_data.anchor_position.y,
+        .x = position[0] + animator.texture.animation_data.anchor_position[0],
+        .y = position[1] + animator.texture.animation_data.anchor_position[1],
         .width = src_rect.width,
         .height = src_rect.height,
     });
@@ -155,16 +155,16 @@ pub fn init(comptime properties: *const cmt.CometProperties, comet: *const cmt.C
         properties.name,
         .{ .centered = {} },
         .{ .centered = {} },
-        properties.window_size.x,
-        properties.window_size.y,
+        properties.window_size[0],
+        properties.window_size[1],
         .{ .vis = .shown },
     );
 
     const renderer = try sdl.createRenderer(window, null, .{ .accelerated = true });
     renderer.setDrawBlendMode(.blend) catch unreachable;
-    const render_texture = sdl.createTexture(renderer, .rgba8888, .target, properties.render_resolution.x, properties.render_resolution.y) catch unreachable;
+    const render_texture = sdl.createTexture(renderer, .rgba8888, .target, properties.render_resolution[0], properties.render_resolution[1]) catch unreachable;
 
-    const window_ratio = @divExact(properties.window_size.x, properties.render_resolution.x);
+    const window_ratio = @divExact(properties.window_size[0], properties.render_resolution[0]);
 
     return .{
         .comet = comet,

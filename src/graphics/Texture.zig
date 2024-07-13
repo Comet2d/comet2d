@@ -47,7 +47,7 @@ pub const AnimationData = struct {
             .frame_width = frame_width,
             .frame_height = frame_height,
             .total_frames = total_frames,
-            .anchor_position = options.anchor_position.resolve(.{ .x = frame_width, .y = frame_height }),
+            .anchor_position = options.anchor_position.resolve(.{ frame_width, frame_height }),
         };
 
         return animation_data;

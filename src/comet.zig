@@ -74,8 +74,8 @@ pub const Comet = struct {
 
 pub const CometProperties = struct {
     name: [:0]const u8 = "My Comet Game",
-    render_resolution: math.Vec2(u32) = .{ .x = 320, .y = 180 },
-    window_size: math.Vec2(u32) = .{ .x = 1280, .y = 720 },
+    render_resolution: math.Vec2(u32) = .{ 320, 180 },
+    window_size: math.Vec2(u32) = .{ 1280, 720 },
 };
 
 pub fn init(comptime properties: CometProperties, allocator: *const std.mem.Allocator) !*Comet {
