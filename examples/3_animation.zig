@@ -31,7 +31,7 @@ pub fn main() !void {
 
         comet.graphics.startFrame(.{ .r = 100, .g = 149, .b = 237 });
 
-        comet.graphics.draw(&heart_animator, .{ .x = 20, .y = 20 }, .{});
+        comet.graphics.draw(&heart_animator, .{ 20, 20 }, .{});
 
         comet.graphics.endFrame();
     }

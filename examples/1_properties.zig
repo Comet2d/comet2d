@@ -10,8 +10,8 @@ pub fn main() !void {
 
     var comet = try cmt.init(.{
         .name = "Sky Game", // name of the window
-        .render_resolution = .{ .x = 60, .y = 60 }, // the resolution your game is rendered at
-        .window_size = .{ .x = 480, .y = 480 }, // the size of the window
+        .render_resolution = .{ 60, 60 }, // the resolution your game is rendered at
+        .window_size = .{ 480, 480 }, // the size of the window
     }, &allocator);
     defer comet.quit();
 
@@ -25,7 +25,7 @@ pub fn main() !void {
 
         comet.graphics.startFrame(.{ .r = 100, .g = 149, .b = 237 });
 
-        comet.graphics.draw(&heart_animator, .{ .x = 20, .y = 20 }, .{});
+        comet.graphics.draw(&heart_animator, .{ 20, 20 }, .{});
 
         comet.graphics.endFrame();
     }
