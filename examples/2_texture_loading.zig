@@ -16,8 +16,8 @@ pub fn main() !void {
     defer heart.destroy();
 
     // can provide an anchor position as either .start, .middle or .end, or as an absolute position
-    const heart_centered = comet.graphics.loadTexture("assets/heart.png", .{ .anchor_position = .{ .relative = .{ .x = .middle, .y = .middle } } });
-    // const heart_centered = comet.graphics.loadTexture("assets/heart.png", .{ .anchor_position = .{ .absolute = .{ .x = 4, .y = 4 } } });
+    const heart_centered = comet.graphics.loadTexture("assets/heart.png", .{ .anchor_position = .{ .relative = .{ .middle, .middle } } });
+    // const heart_centered = comet.graphics.loadTexture("assets/heart.png", .{ .anchor_position = .{ .absolute = .{  4, 4 } } });
     defer heart_centered.destroy();
 
     const heart_frames = comet.graphics.loadTexture("assets/heart_sheet.png", .{ .h_frames = 4 });
@@ -36,9 +36,9 @@ pub fn main() !void {
 
         comet.graphics.startFrame(.{ .r = 100, .g = 149, .b = 237 });
 
-        comet.graphics.draw(&heart_animator, .{ .x = 10, .y = 20 }, .{});
-        comet.graphics.draw(&heart_centered_animator, .{ .x = 20, .y = 20 }, .{});
-        comet.graphics.draw(&heart_frames_animator, .{ .x = 30, .y = 20 }, .{});
+        comet.graphics.draw(&heart_animator, .{ 10, 20 }, .{});
+        comet.graphics.draw(&heart_centered_animator, .{ 20, 20 }, .{});
+        comet.graphics.draw(&heart_frames_animator, .{ 30, 20 }, .{});
 
         comet.graphics.endFrame();
     }

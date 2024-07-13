@@ -40,8 +40,8 @@ pub fn main() !void {
         comet.graphics.startFrame(.{ .r = 100, .g = 149, .b = 237 });
 
         // drawing code goes here
-        comet.graphics.draw(&text_animator, .{ .x = 0, .y = 20 }, .{});
-        comet.graphics.draw(&punchline_animator, .{ .x = 0, .y = 36 }, .{});
+        comet.graphics.draw(&text_animator, .{ 0, 20 }, .{});
+        comet.graphics.draw(&punchline_animator, .{ 0, 36 }, .{});
 
         comet.graphics.endFrame();
     }
