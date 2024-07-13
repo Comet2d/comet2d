@@ -1,4 +1,5 @@
 # Comet2d
+
 Simple 2d game framework for simple 2d games
 
 ## Documentation
@@ -15,7 +16,7 @@ git submodule update --init --recursive
 To reference a specific version, use the following:
 ```sh
 cd comet2d
-git checkout tags/v0.0.1
+git checkout tags/[VERSION] # eg v1.5.2
 ```
 
 Next, add it to your `build.zig`.
