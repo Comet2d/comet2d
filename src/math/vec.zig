@@ -32,9 +32,13 @@ pub fn normalise(vec: anytype) @TypeOf(vec) {
     return vec / @as(@TypeOf(vec), @splat(mag));
 }
 
-pub fn distanceBetween(a: anytype, b: @TypeOf(a)) VecElementInner(@TypeOf(a)) {
+pub fn distanceSquaredBetween(a: anytype, b: @TypeOf(a)) VecElementInner(@TypeOf(a)) {
     const diff = a - b;
-    return magnitude(diff);
+    return squareMagnitude(diff);
+}
+
+pub fn distanceBetween(a: anytype, b: @TypeOf(a)) VecElementInner(@TypeOf(a)) {
+    return @sqrt(distanceSquaredBetween(a, b));
 }
 
 fn VecOrElseArray(comptime T: type, comptime len: usize) type {
